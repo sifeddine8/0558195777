@@ -1,33 +1,32 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 const client = new Discord.Client();
+var prefix = "!!!";
+client.on("message", message => {
+
+            if (message.content.startsWith(prefix + "bc")) {
+                         if (!message.member.hasPermission("ADMINISTRATOR"))  return;
+  let args = message.content.split(" ").slice(1);
+  var argresult = args.join(' '); 
+  message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
+ m.send(`${argresult}\n ${m}`);
+})
+ message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'online').size}\` : عدد الاعضاء المستلمين`); 
+ message.delete(); 
+};     
+});
+
 
 client.on('ready', () => {
+   console.log(`----------------`);
+      console.log(`Desert Bot- Script By : i1Suhaib`);
+        console.log(`----------------`);
+      console.log(`ON ${client.guilds.size} Servers '     Script By : i1Suhaib ' `);
+    console.log(`----------------`);
   console.log(`Logged in as ${client.user.tag}!`);
+client.user.setGame(`#bc | Only.Bc`,"http://twitch.tv/S-F")
+client.user.setStatus("dnd")
 });
 
-client.on('message', msg => {
-  if (msg.content === 'ok') {
-    msg.reply('ko!!!!');
-  }
-});
 
-client.on('guildMemberAdd', member => {
-  var embed = new Discord.RichEmbed()
-  .setThumbnail(member.user.avatarURL)
-.addField("***شكرا الانضمامك الينا***" ,member.user.username )
-  .setDescription('***بكل حب واحترام وشوق نستقبلك ونتمنى لك قضآء أجمل اللحظات ولآوقات معنا***')
-  .setColor('RANDOM')
-  .setImage('http://www.imgion.com/images/01/Welcome-buddy.jpg')
-var channel =member.guild.channels.find('name', 'chat-arabjoker')
-if (!channel) return;
-channel.send({embed : embed});
-});
 
-client.on('guildCreate', guild => {
-  var embed = new Discord.RichEmbed()
-  .setColor(0x5500ff)
-  .setDescription(`**شكراً لك لإضافه البوت الى سيرفرك**`)
-      guild.owner.send(embed)
-});
-
-client.login('NTQzMjMxNjEwNTk4ODUwNTgw.Dz5jrg.tYqqbi40GJuZtp7F2-ASIx1ij2o');
+client.login("NTQxMDM1OTExNjAxNzE3MjU4.Dz5i2A.9b82Y36MFCU2FDtBXd1V78QuC7U");
